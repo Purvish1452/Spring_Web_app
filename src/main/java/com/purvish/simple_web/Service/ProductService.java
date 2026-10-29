@@ -10,12 +10,23 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    List<Product> products = Arrays.asList(
+    List<Product> products = new ArrayList<>(Arrays.asList(
             new Product("Product 1", 1, 100),
             new Product("Product 2", 2, 200),
             new Product("Product 3", 3, 300)
-    );
+    ));
     public List<Product> getProducts() {
         return products;
+    }
+
+
+    public  Product getProductById(int productId) {
+        return products.stream()
+                .filter(p->p.getProductId()==productId)
+                .findFirst().get();
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 }

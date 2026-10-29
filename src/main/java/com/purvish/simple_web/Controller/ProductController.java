@@ -3,8 +3,7 @@ package com.purvish.simple_web.Controller;
 import com.purvish.simple_web.Model.Product;
 import com.purvish.simple_web.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -21,9 +20,20 @@ public class ProductController {
     }
 
 
-    @RequestMapping("/products")
+    @GetMapping("/products")
     public List<Product> getProducts() {
         return service.getProducts();
+    }
+
+
+    @GetMapping("/products/{productId}")
+    public Product getProductById(@PathVariable int productId) {
+        return service.getProductById(productId);
+    }
+
+    @PostMapping("/products")
+    public void addProduct(@RequestBody Product product) {
+        service.addProduct(product);
     }
 
 }
